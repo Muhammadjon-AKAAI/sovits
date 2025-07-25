@@ -24,19 +24,19 @@ logging.getLogger("h5py").setLevel(logging.INFO)
 logging.getLogger("numba").setLevel(logging.INFO)
 from random import randint
 
-from module import commons
-from module.data_utils import (
+from sovits.GPT_SoVITS.module import commons
+from sovits.GPT_SoVITS.module.data_utils import (
     DistributedBucketSampler,
     TextAudioSpeakerCollate,
     TextAudioSpeakerLoader,
 )
-from module.losses import discriminator_loss, feature_loss, generator_loss, kl_loss
-from module.mel_processing import mel_spectrogram_torch, spec_to_mel_torch
-from module.models import (
+from sovits.GPT_SoVITS.module.losses import discriminator_loss, feature_loss, generator_loss, kl_loss
+from sovits.GPT_SoVITS.module.mel_processing import mel_spectrogram_torch, spec_to_mel_torch
+from sovits.GPT_SoVITS.module.models import (
     MultiPeriodDiscriminator,
     SynthesizerTrn,
 )
-from process_ckpt import savee
+from sovits.GPT_SoVITS.process_ckpt import savee
 
 torch.backends.cudnn.benchmark = False
 torch.backends.cudnn.deterministic = False

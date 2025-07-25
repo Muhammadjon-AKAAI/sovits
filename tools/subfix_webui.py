@@ -1,5 +1,5 @@
 import sys
-from tools.i18n.i18n import I18nAuto, scan_language_list
+from sovits.tools.i18n.i18n import I18nAuto, scan_language_list
 
 language = sys.argv[-1] if sys.argv[-1] in scan_language_list() else "Auto"
 i18n = I18nAuto(language=language)

@@ -1,1 +1,1 @@
-from text.g2pw.g2pw import *
+from sovits.GPT_SoVITS.text.g2pw.g2pw import *

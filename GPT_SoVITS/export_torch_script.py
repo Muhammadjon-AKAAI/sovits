@@ -13,12 +13,12 @@ from torch.nn import functional as F
 from transformers import AutoModelForMaskedLM, AutoTokenizer
 from feature_extractor import cnhubert
 
-from AR.models.t2s_lightning_module import Text2SemanticLightningModule
-from module.models_onnx import SynthesizerTrn
+from sovits.GPT_SoVITS.AR.models.t2s_lightning_module import Text2SemanticLightningModule
+from sovits.GPT_SoVITS.module.models_onnx import SynthesizerTrn
 
 from inference_webui import get_phones_and_bert
 
-from sv import SV
+from sovits.GPT_SoVITS.sv import SV
 import kaldi as Kaldi
 
 import os

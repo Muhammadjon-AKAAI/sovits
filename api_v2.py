@@ -117,7 +117,7 @@ from fastapi import FastAPI, Response
 from fastapi.responses import StreamingResponse, JSONResponse
 import uvicorn
 from io import BytesIO
-from tools.i18n.i18n import I18nAuto
+from sovits.tools.i18n.i18n import I18nAuto
 from GPT_SoVITS.TTS_infer_pack.TTS import TTS, TTS_Config
 from GPT_SoVITS.TTS_infer_pack.text_segmentation_method import get_method_names as get_cut_method_names
 from pydantic import BaseModel

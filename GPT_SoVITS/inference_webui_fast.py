@@ -57,11 +57,11 @@ bert_path = os.environ.get("bert_path", None)
 version = model_version = os.environ.get("version", "v2")
 
 import gradio as gr
-from TTS_infer_pack.text_segmentation_method import get_method
-from TTS_infer_pack.TTS import NO_PROMPT_ERROR, TTS, TTS_Config
+from sovits.GPT_SoVITS.TTS_infer_pack.text_segmentation_method import get_method
+from sovits.GPT_SoVITS.TTS_infer_pack.TTS import NO_PROMPT_ERROR, TTS, TTS_Config
 
-from tools.assets import css, js, top_html
-from tools.i18n.i18n import I18nAuto, scan_language_list
+from sovits.tools.assets import css, js, top_html
+from sovits.tools.i18n.i18n import I18nAuto, scan_language_list
 
 language = os.environ.get("language", "Auto")
 language = sys.argv[-1] if sys.argv[-1] in scan_language_list() else language
@@ -225,7 +225,7 @@ with open("./weight.json", "r", encoding="utf-8") as file:
     if isinstance(sovits_path, list):
         sovits_path = sovits_path[0]
 
-from process_ckpt import get_sovits_version_from_path_fast
+from sovits.GPT_SoVITS.process_ckpt import get_sovits_version_from_path_fast
 
 v3v4set = {"v3", "v4"}
 

@@ -60,8 +60,8 @@ import shutil
 import subprocess
 from subprocess import Popen
 
-from tools.assets import css, js, top_html
-from tools.i18n.i18n import I18nAuto, scan_language_list
+from sovits.tools.assets import css, js, top_html
+from sovits.tools.i18n.i18n import I18nAuto, scan_language_list
 
 language = sys.argv[-1] if sys.argv[-1] in scan_language_list() else "Auto"
 os.environ["language"] = language
@@ -83,8 +83,8 @@ from config import (
     webui_port_subfix,
     webui_port_uvr5,
 )
-from tools import my_utils
-from tools.my_utils import check_details, check_for_existance
+from sovits.tools import my_utils
+from sovits.tools.my_utils import check_details, check_for_existance
 
 os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
@@ -364,7 +364,7 @@ def change_tts_inference(bert_path, cnhubert_base_path, gpu_number, gpt_path, so
         )
 
 
-from tools.asr.config import asr_dict
+from sovits.tools.asr.config import asr_dict
 
 process_name_asr = i18n("语音识别")
 

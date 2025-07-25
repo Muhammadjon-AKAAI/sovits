@@ -8,9 +8,9 @@ from export_torch_script import (
 from f5_tts.model.backbones.dit import DiT
 from inference_webui import get_phones_and_bert
 import librosa
-from module import commons
-from module.mel_processing import mel_spectrogram_torch
-from module.models_onnx import CFM, Generator, SynthesizerTrnV3
+from sovits.GPT_SoVITS.module import commons
+from sovits.GPT_SoVITS.module.mel_processing import mel_spectrogram_torch
+from sovits.GPT_SoVITS.module.models_onnx import CFM, Generator, SynthesizerTrnV3
 import numpy as np
 import torch._dynamo.config
 import torchaudio
@@ -578,7 +578,7 @@ class DictToAttrRecursive(dict):
             raise AttributeError(f"Attribute {item} not found")
 
 
-from process_ckpt import get_sovits_version_from_path_fast, load_sovits_new
+from sovits.GPT_SoVITS.process_ckpt import get_sovits_version_from_path_fast, load_sovits_new
 
 v3v4set = {"v3", "v4"}
 

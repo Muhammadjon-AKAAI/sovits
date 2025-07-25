@@ -24,19 +24,19 @@ logging.getLogger("numba").setLevel(logging.INFO)
 from collections import OrderedDict as od
 from random import randint
 
-from module import commons
-from module.data_utils import (
+from sovits.GPT_SoVITS.module import commons
+from sovits.GPT_SoVITS.module.data_utils import (
     DistributedBucketSampler,
     TextAudioSpeakerCollateV3,
     TextAudioSpeakerLoaderV3,
     TextAudioSpeakerCollateV4,
     TextAudioSpeakerLoaderV4,
 )
-from module.models import (
+from sovits.GPT_SoVITS.module.models import (
     SynthesizerTrnV3 as SynthesizerTrn,
 )
 from peft import LoraConfig, get_peft_model
-from process_ckpt import savee
+from sovits.GPT_SoVITS.process_ckpt import savee
 
 torch.backends.cudnn.benchmark = False
 torch.backends.cudnn.deterministic = False

@@ -23,7 +23,7 @@ import torchaudio
 now_dir = os.getcwd()
 sys.path.append(now_dir)
 sys.path.append(f"{now_dir}/GPT_SoVITS/eres2net")
-from tools.my_utils import clean_path
+from sovits.tools.my_utils import clean_path
 from time import time as ttime
 import shutil
 from ERes2NetV2 import ERes2NetV2

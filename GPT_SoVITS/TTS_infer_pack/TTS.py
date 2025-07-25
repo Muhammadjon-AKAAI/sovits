@@ -21,20 +21,20 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 import yaml
-from AR.models.t2s_lightning_module import Text2SemanticLightningModule
-from BigVGAN.bigvgan import BigVGAN
-from feature_extractor.cnhubert import CNHubert
-from module.mel_processing import mel_spectrogram_torch, spectrogram_torch
-from module.models import SynthesizerTrn, SynthesizerTrnV3, Generator
+from sovits.GPT_SoVITS.AR.models.t2s_lightning_module import Text2SemanticLightningModule
+from sovits.GPT_SoVITS.BigVGAN.bigvgan import BigVGAN
+from sovits.GPT_SoVITS.feature_extractor.cnhubert import CNHubert
+from sovits.GPT_SoVITS.module.mel_processing import mel_spectrogram_torch, spectrogram_torch
+from sovits.GPT_SoVITS.module.models import SynthesizerTrn, SynthesizerTrnV3, Generator
 from peft import LoraConfig, get_peft_model
-from process_ckpt import get_sovits_version_from_path_fast, load_sovits_new
+from sovits.GPT_SoVITS.process_ckpt import get_sovits_version_from_path_fast, load_sovits_new
 from transformers import AutoModelForMaskedLM, AutoTokenizer
 
-from tools.audio_sr import AP_BWE
-from tools.i18n.i18n import I18nAuto, scan_language_list
-from TTS_infer_pack.text_segmentation_method import splits
-from TTS_infer_pack.TextPreprocessor import TextPreprocessor
-from sv import SV
+from sovits.tools.audio_sr import AP_BWE
+from sovits.tools.i18n.i18n import I18nAuto, scan_language_list
+from sovits.GPT_SoVITS.TTS_infer_pack.text_segmentation_method import splits
+from sovits.GPT_SoVITS.TTS_infer_pack.TextPreprocessor import TextPreprocessor
+from sovits.GPT_SoVITS.sv import SV
 
 resample_transform_dict = {}
 
@@ -220,55 +220,55 @@ class TTS_Config:
             "device": "cpu",
             "is_half": False,
             "version": "v1",
-            "t2s_weights_path": "GPT_SoVITS/pretrained_models/s1bert25hz-2kh-longer-epoch=68e-step=50232.ckpt",
-            "vits_weights_path": "GPT_SoVITS/pretrained_models/s2G488k.pth",
-            "cnhuhbert_base_path": "GPT_SoVITS/pretrained_models/chinese-hubert-base",
-            "bert_base_path": "GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large",
+            "t2s_weights_path": "sovits/GPT_SoVITS/pretrained_models/s1bert25hz-2kh-longer-epoch=68e-step=50232.ckpt",
+            "vits_weights_path": "sovits/GPT_SoVITS/pretrained_models/s2G488k.pth",
+            "cnhuhbert_base_path": "sovits/GPT_SoVITS/pretrained_models/chinese-hubert-base",
+            "bert_base_path": "sovits/GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large",
         },
         "v2": {
             "device": "cpu",
             "is_half": False,
             "version": "v2",
-            "t2s_weights_path": "GPT_SoVITS/pretrained_models/gsv-v2final-pretrained/s1bert25hz-5kh-longer-epoch=12-step=369668.ckpt",
-            "vits_weights_path": "GPT_SoVITS/pretrained_models/gsv-v2final-pretrained/s2G2333k.pth",
-            "cnhuhbert_base_path": "GPT_SoVITS/pretrained_models/chinese-hubert-base",
-            "bert_base_path": "GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large",
+            "t2s_weights_path": "sovits/GPT_SoVITS/pretrained_models/gsv-v2final-pretrained/s1bert25hz-5kh-longer-epoch=12-step=369668.ckpt",
+            "vits_weights_path": "sovits/GPT_SoVITS/pretrained_models/gsv-v2final-pretrained/s2G2333k.pth",
+            "cnhuhbert_base_path": "sovits/GPT_SoVITS/pretrained_models/chinese-hubert-base",
+            "bert_base_path": "sovits/GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large",
         },
         "v3": {
             "device": "cpu",
             "is_half": False,
             "version": "v3",
-            "t2s_weights_path": "GPT_SoVITS/pretrained_models/s1v3.ckpt",
-            "vits_weights_path": "GPT_SoVITS/pretrained_models/s2Gv3.pth",
-            "cnhuhbert_base_path": "GPT_SoVITS/pretrained_models/chinese-hubert-base",
-            "bert_base_path": "GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large",
+            "t2s_weights_path": "sovits/GPT_SoVITS/pretrained_models/s1v3.ckpt",
+            "vits_weights_path": "sovits/GPT_SoVITS/pretrained_models/s2Gv3.pth",
+            "cnhuhbert_base_path": "sovits/GPT_SoVITS/pretrained_models/chinese-hubert-base",
+            "bert_base_path": "sovits/GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large",
         },
         "v4": {
             "device": "cpu",
             "is_half": False,
             "version": "v4",
-            "t2s_weights_path": "GPT_SoVITS/pretrained_models/s1v3.ckpt",
-            "vits_weights_path": "GPT_SoVITS/pretrained_models/gsv-v4-pretrained/s2Gv4.pth",
-            "cnhuhbert_base_path": "GPT_SoVITS/pretrained_models/chinese-hubert-base",
-            "bert_base_path": "GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large",
+            "t2s_weights_path": "sovits/GPT_SoVITS/pretrained_models/s1v3.ckpt",
+            "vits_weights_path": "sovits/GPT_SoVITS/pretrained_models/gsv-v4-pretrained/s2Gv4.pth",
+            "cnhuhbert_base_path": "sovits/GPT_SoVITS/pretrained_models/chinese-hubert-base",
+            "bert_base_path": "sovits/GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large",
         },
         "v2Pro": {
             "device": "cpu",
             "is_half": False,
             "version": "v2Pro",
-            "t2s_weights_path": "GPT_SoVITS/pretrained_models/s1v3.ckpt",
-            "vits_weights_path": "GPT_SoVITS/pretrained_models/v2Pro/s2Gv2Pro.pth",
-            "cnhuhbert_base_path": "GPT_SoVITS/pretrained_models/chinese-hubert-base",
-            "bert_base_path": "GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large",
+            "t2s_weights_path": "sovits/GPT_SoVITS/pretrained_models/s1v3.ckpt",
+            "vits_weights_path": "sovits/GPT_SoVITS/pretrained_models/v2Pro/s2Gv2Pro.pth",
+            "cnhuhbert_base_path": "sovits/GPT_SoVITS/pretrained_models/chinese-hubert-base",
+            "bert_base_path": "sovits/GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large",
         },
         "v2ProPlus": {
             "device": "cpu",
             "is_half": False,
             "version": "v2ProPlus",
-            "t2s_weights_path": "GPT_SoVITS/pretrained_models/s1v3.ckpt",
-            "vits_weights_path": "GPT_SoVITS/pretrained_models/v2Pro/s2Gv2ProPlus.pth",
-            "cnhuhbert_base_path": "GPT_SoVITS/pretrained_models/chinese-hubert-base",
-            "bert_base_path": "GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large",
+            "t2s_weights_path": "sovits/GPT_SoVITS/pretrained_models/s1v3.ckpt",
+            "vits_weights_path": "sovits/GPT_SoVITS/pretrained_models/v2Pro/s2Gv2ProPlus.pth",
+            "cnhuhbert_base_path": "sovits/GPT_SoVITS/pretrained_models/chinese-hubert-base",
+            "bert_base_path": "sovits/GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large",
         },
     }
     configs: dict = None
@@ -289,7 +289,7 @@ class TTS_Config:
 
     def __init__(self, configs: Union[dict, str] = None):
         # 设置默认配置文件路径
-        configs_base_path: str = "GPT_SoVITS/configs/"
+        configs_base_path: str = "sovits/GPT_SoVITS/configs/"
         os.makedirs(configs_base_path, exist_ok=True)
         self.configs_path: str = os.path.join(configs_base_path, "tts_infer.yaml")
 

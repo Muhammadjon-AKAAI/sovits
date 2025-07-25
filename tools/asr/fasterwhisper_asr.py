@@ -9,9 +9,9 @@ from huggingface_hub import snapshot_download
 from huggingface_hub.errors import LocalEntryNotFoundError
 from tqdm import tqdm
 
-from tools.asr.config import get_models
-from tools.asr.funasr_asr import only_asr
-from tools.my_utils import load_cudnn
+from sovits.tools.asr.config import get_models
+from sovits.tools.asr.funasr_asr import only_asr
+from sovits.tools.my_utils import load_cudnn
 
 # fmt: off
 language_code_list = [

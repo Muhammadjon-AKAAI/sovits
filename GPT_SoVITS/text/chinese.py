@@ -4,9 +4,9 @@ import re
 import cn2an
 from pypinyin import lazy_pinyin, Style
 
-from text.symbols import punctuation
-from text.tone_sandhi import ToneSandhi
-from text.zh_normalization.text_normlization import TextNormalizer
+from sovits.GPT_SoVITS.text.symbols import punctuation
+from sovits.GPT_SoVITS.text.tone_sandhi import ToneSandhi
+from sovits.GPT_SoVITS.text.zh_normalization.text_normlization import TextNormalizer
 
 normalizer = lambda x: cn2an.transform(x, "an2cn")
 

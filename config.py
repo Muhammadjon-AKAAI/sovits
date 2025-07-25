@@ -4,27 +4,27 @@ import sys
 
 import torch
 
-from tools.i18n.i18n import I18nAuto
+from sovits.tools.i18n.i18n import I18nAuto
 
 i18n = I18nAuto(language=os.environ.get("language", "Auto"))
 
 
 pretrained_sovits_name = {
     "v1": "GPT_SoVITS/pretrained_models/s2G488k.pth",
-    "v2": "GPT_SoVITS/pretrained_models/gsv-v2final-pretrained/s2G2333k.pth",
+    "v2": "sovits/GPT_SoVITS/pretrained_models/gsv-v2final-pretrained/s2G2333k.pth",
     "v3": "GPT_SoVITS/pretrained_models/s2Gv3.pth",  ###v3v4还要检查vocoder，算了。。。
     "v4": "GPT_SoVITS/pretrained_models/gsv-v4-pretrained/s2Gv4.pth",
     "v2Pro": "GPT_SoVITS/pretrained_models/v2Pro/s2Gv2Pro.pth",
-    "v2ProPlus": "GPT_SoVITS/pretrained_models/v2Pro/s2Gv2ProPlus.pth",
+    "v2ProPlus": "sovits/GPT_SoVITS/pretrained_models/v2Pro/s2Gv2ProPlus.pth",
 }
 
 pretrained_gpt_name = {
     "v1": "GPT_SoVITS/pretrained_models/s1bert25hz-2kh-longer-epoch=68e-step=50232.ckpt",
-    "v2": "GPT_SoVITS/pretrained_models/gsv-v2final-pretrained/s1bert25hz-5kh-longer-epoch=12-step=369668.ckpt",
+    "v2": "sovits/GPT_SoVITS/pretrained_models/gsv-v2final-pretrained/s1bert25hz-5kh-longer-epoch=12-step=369668.ckpt",
     "v3": "GPT_SoVITS/pretrained_models/s1v3.ckpt",
     "v4": "GPT_SoVITS/pretrained_models/s1v3.ckpt",
     "v2Pro": "GPT_SoVITS/pretrained_models/s1v3.ckpt",
-    "v2ProPlus": "GPT_SoVITS/pretrained_models/s1v3.ckpt",
+    "v2ProPlus": "sovits/GPT_SoVITS/pretrained_models/s1v3.ckpt",
 }
 name2sovits_path = {
     # i18n("不训练直接推v1底模！"): "GPT_SoVITS/pretrained_models/s2G488k.pth",
@@ -38,8 +38,8 @@ name2gpt_path = {
     # i18n("不训练直接推v1底模！"):"GPT_SoVITS/pretrained_models/s1bert25hz-2kh-longer-epoch=68e-step=50232.ckpt",
     i18n(
         "不训练直接推v2底模！"
-    ): "GPT_SoVITS/pretrained_models/gsv-v2final-pretrained/s1bert25hz-5kh-longer-epoch=12-step=369668.ckpt",
-    i18n("不训练直接推v3底模！"): "GPT_SoVITS/pretrained_models/s1v3.ckpt",
+    ): "sovits/GPT_SoVITS/pretrained_models/gsv-v2final-pretrained/s1bert25hz-5kh-longer-epoch=12-step=369668.ckpt",
+    i18n("不训练直接推v3底模！"): "sovits/GPT_SoVITS/pretrained_models/s1v3.ckpt",
 }
 SoVITS_weight_root = [
     "SoVITS_weights",
@@ -129,10 +129,10 @@ is_half = True if is_half_str.lower() == "true" else False
 is_share_str = os.environ.get("is_share", "False")
 is_share = True if is_share_str.lower() == "true" else False
 
-cnhubert_path = "GPT_SoVITS/pretrained_models/chinese-hubert-base"
-bert_path = "GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large"
-pretrained_sovits_path = "GPT_SoVITS/pretrained_models/s2G488k.pth"
-pretrained_gpt_path = "GPT_SoVITS/pretrained_models/s1bert25hz-2kh-longer-epoch=68e-step=50232.ckpt"
+cnhubert_path = "sovits/GPT_SoVITS/pretrained_models/chinese-hubert-base"
+bert_path = "sovits/GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large"
+pretrained_sovits_path = "sovits/GPT_SoVITS/pretrained_models/s2G488k.pth"
+pretrained_gpt_path = "sovits/GPT_SoVITS/pretrained_models/s1bert25hz-2kh-longer-epoch=68e-step=50232.ckpt"
 
 exp_root = "logs"
 python_exec = sys.executable or "python"

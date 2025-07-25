@@ -346,7 +346,7 @@ sr_model = None
 def audio_sr(audio, sr):
     global sr_model
     if sr_model == None:
-        from tools.audio_sr import AP_BWE
+        from sovits.tools.audio_sr import AP_BWE
 
         try:
             sr_model = AP_BWE(device, DictToAttrRecursive)

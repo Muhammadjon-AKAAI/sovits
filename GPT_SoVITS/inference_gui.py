@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QPushB
 from PyQt5.QtWidgets import QGridLayout, QVBoxLayout, QWidget, QFileDialog, QStatusBar, QComboBox
 import soundfile as sf
 
-from tools.i18n.i18n import I18nAuto
+from sovits.tools.i18n.i18n import I18nAuto
 
 i18n = I18nAuto()
 

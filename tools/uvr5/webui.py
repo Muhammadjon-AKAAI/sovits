@@ -4,8 +4,8 @@ import traceback
 
 import gradio as gr
 
-from tools.i18n.i18n import I18nAuto
-from tools.my_utils import clean_path
+from sovits.tools.i18n.i18n import I18nAuto
+from sovits.tools.my_utils import clean_path
 
 i18n = I18nAuto()
 

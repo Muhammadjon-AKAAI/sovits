@@ -8,7 +8,7 @@ import gradio as gr
 import numpy as np
 import pandas as pd
 
-from tools.i18n.i18n import I18nAuto
+from sovits.tools.i18n.i18n import I18nAuto
 
 i18n = I18nAuto(language=os.environ.get("language", "Auto"))
 
